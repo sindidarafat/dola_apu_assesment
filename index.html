@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Portfolio of Sindid Arafat: Product and Business Analyst. About, Bizception 2026 case work, and Figma attendance workflow.">
+<title>Sindid Arafat Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;700;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout concept: an analyst's working sheet. Graph-paper ground, sheet-style tabs for the three pages, one highlighter mark as the single loud gesture. */
+:root{
+  --bg:#EDF1F6;
+  --surface:#FFFFFF;
+  --fg:#0E1A2B;
+  --muted:#53617A;
+  --line:#CBD5E3;
+  --soft:#E1E8F2;
+  --accent:#2446D8;
+  --accent-fg:#FFFFFF;
+  --mark:#FFD84D;
+  --mark-fg:#0E1A2B;
+  --grid:rgba(14,26,43,.055);
+  --neg:#B4452F;
+  --font-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --font-body:'Instrument Sans','Segoe UI',system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A121E;--surface:#111C2C;--fg:#E7EEF8;--muted:#97A5BD;--line:#26344A;--soft:#16243A;
+    --accent:#8AA4FF;--accent-fg:#0A121E;--mark:#E9C73A;--mark-fg:#0A121E;--grid:rgba(231,238,248,.045);--neg:#E8826B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0A121E;--surface:#111C2C;--fg:#E7EEF8;--muted:#97A5BD;--line:#26344A;--soft:#16243A;
+  --accent:#8AA4FF;--accent-fg:#0A121E;--mark:#E9C73A;--mark-fg:#0A121E;--grid:rgba(231,238,248,.045);--neg:#E8826B;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  padding-block:0 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  background-color:var(--bg);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:32px 32px;
+  color:var(--fg);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:3px}
+.wrap{max-width:1080px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.08}
+p{margin:0}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 24px;padding-top:14px}
+.brand{font-family:var(--font-display);font-weight:800;font-size:1.15rem;letter-spacing:-.01em;padding-bottom:10px}
+.brand small{display:block;font-family:var(--font-mono);font-weight:400;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+nav{display:flex;gap:4px}
+.tab{
+  font-family:var(--font-mono);font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;
+  color:var(--muted);padding:9px 14px 10px;border:1px solid transparent;border-bottom:0;border-radius:5px 5px 0 0;position:relative;top:1px;
+}
+.tab:hover{color:var(--fg)}
+.tab[aria-current="page"]{color:var(--fg);background:var(--surface);border-color:var(--line);box-shadow:inset 0 3px 0 var(--mark)}
+
+/* banner */
+.banner{margin-top:32px;padding:20px 22px;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--mark);border-radius:6px;display:grid;gap:8px}
+.banner-title{font-weight:800;font-size:clamp(1.3rem,3.6vw,2rem);letter-spacing:-.02em;line-height:1.15}
+.banner-sub{color:var(--muted);font-size:1.02rem;max-width:68ch}
+.banner+.page{padding-top:36px}
+
+/* shared */
+.page{padding-top:48px}
+.eyebrow{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.label{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:12px;border-top:2px solid var(--fg);margin-bottom:18px}
+mark{background:linear-gradient(transparent 52%,var(--mark) 52% 92%,transparent 92%);color:inherit;padding:0 .12em}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.95rem;text-decoration:none;padding:11px 18px;border-radius:5px;border:1.5px solid var(--fg);color:var(--fg);background:transparent;cursor:pointer;font-family:var(--font-body)}
+.btn:hover{background:var(--soft)}
+.btn.solid{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.btn.solid:hover{filter:brightness(1.08)}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+.copy{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:var(--surface);color:var(--muted);padding:3px 8px;border-radius:4px;cursor:pointer;margin-left:8px}
+.copy:hover{color:var(--fg);border-color:var(--fg)}
+
+/* about */
+.hero h1{font-weight:800;font-size:clamp(2.7rem,9vw,6rem);letter-spacing:-.035em;line-height:.96;margin:14px 0 22px}
+.hero .lead{max-width:62ch;font-size:clamp(1.05rem,2.4vw,1.28rem);line-height:1.55}
+.hero .row{margin-top:26px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;margin-top:44px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)}
+.facts div{padding:16px 18px;border-right:1px solid var(--line);min-width:0}
+.facts div:last-child{border-right:0}
+.facts dt{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:4px 0 0;font-weight:600}
+.facts{margin-left:0;margin-right:0}
+dl{margin:0}
+.cols{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:48px;margin-top:56px}
+.stack{display:flex;flex-direction:column;gap:40px;min-width:0}
+.item{display:grid;gap:4px}
+.item+.item{margin-top:22px}
+.item h3{font-size:1.25rem;font-weight:700;letter-spacing:-.01em}
+.meta{font-family:var(--font-mono);font-size:.78rem;color:var(--muted)}
+.item ul{margin:8px 0 0;padding-left:1.1em}
+.item li+li{margin-top:4px}
+.item p{max-width:62ch}
+.skills{display:grid;gap:14px}
+.skills dt{font-weight:600}
+.skills dd{margin:2px 0 0;color:var(--muted)}
+.contact{margin-top:6px;display:grid;gap:8px}
+.contact p{overflow-wrap:anywhere}
+
+/* work */
+.intro{max-width:70ch;margin-top:12px;font-size:1.1rem}
+.page h2.big{font-weight:800;font-size:clamp(2rem,6vw,3.6rem);letter-spacing:-.03em}
+.case{margin-top:48px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:clamp(18px,4vw,36px)}
+.case h2{font-weight:800;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.025em;margin:8px 0 22px}
+.case-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px}
+.case h3{font-family:var(--font-mono);font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.case .blk+.blk{margin-top:22px}
+.case .blk p{max-width:62ch}
+.moves{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.moves li{padding-left:16px;border-left:3px solid var(--mark)}
+.moves b{font-weight:600}
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.nums div{padding:12px 14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-width:0}
+.nums div:nth-child(2n){border-right:0}
+.nums div:nth-last-child(-n+2){border-bottom:0}
+.nums dt{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.nums dd{margin:3px 0 0;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.35}
+.viz{margin-top:22px}
+.bars{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+.bars li{display:grid;gap:4px}
+.bars .top2{display:flex;justify-content:space-between;gap:12px;font-size:.88rem}
+.bars .top2 span:last-child{font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.track{height:10px;background:var(--soft);border-radius:2px;overflow:hidden}
+.fill{height:100%;width:var(--w);background:var(--accent)}
+.viz-title{font-size:.88rem;font-weight:600;margin-bottom:10px}
+.viz svg{width:100%;height:auto;display:block;max-width:420px}
+.cap{font-size:.8rem;color:var(--muted);margin-top:8px}
+.skillrows{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:20px}
+.skillrows h3{font-size:1.15rem;font-weight:700;margin-bottom:6px}
+.skillrows p{color:var(--muted);font-size:.95rem}
+.skillrows>div{border-top:2px solid var(--fg);padding-top:12px;min-width:0}
+
+/* figma */
+.linkbox{margin-top:26px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px 20px;display:grid;gap:12px}
+.url{font-family:var(--font-mono);font-size:.78rem;color:var(--muted);overflow-wrap:anywhere;user-select:all}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:28px 20px;margin-top:20px}
+.step{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:0}
+.phone{width:168px;max-width:100%;aspect-ratio:9/17;background:var(--surface);border:2px solid var(--fg);border-radius:24px;padding:14px 12px;display:flex;flex-direction:column;gap:8px;font-size:11px;line-height:1.35;overflow:hidden}
+.phone .bar{height:4px;width:38px;background:var(--line);border-radius:2px;align-self:center;margin-bottom:2px}
+.phone h4{margin:0;font-family:var(--font-display);font-size:14px;font-weight:700}
+.field{border:1px solid var(--line);border-radius:5px;padding:7px 8px;color:var(--muted)}
+.pbtn{background:var(--accent);color:var(--accent-fg);border-radius:5px;padding:8px;text-align:center;font-weight:600;margin-top:auto}
+.cls{border:1px solid var(--line);border-radius:5px;padding:7px 8px;display:flex;justify-content:space-between;gap:6px}
+.cls.on{border-color:var(--accent);background:var(--soft)}
+.stu{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--line)}
+.tog{display:flex;gap:3px}
+.tog i{font-style:normal;border:1px solid var(--line);border-radius:3px;padding:1px 5px;color:var(--muted)}
+.tog i.p{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.tog i.a{background:var(--mark);border-color:var(--mark);color:var(--mark-fg)}
+.done{display:grid;place-items:center;flex:1;text-align:center;gap:6px;align-content:center}
+.tick{width:40px;height:40px;border-radius:50%;background:var(--accent);color:var(--accent-fg);display:grid;place-items:center;font-weight:700;font-size:20px}
+.step figcaption{font-size:.9rem;text-align:center;max-width:22ch}
+.step figcaption b{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:500}
+
+footer{margin-top:72px;padding-top:16px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between}
+
+@media (max-width:820px){
+  .cols,.case-grid{grid-template-columns:minmax(0,1fr);gap:36px}
+  .facts div{border-right:0;border-bottom:1px solid var(--line)}
+  .facts div:last-child{border-bottom:0}
+}
+@media (max-width:480px){
+  .tab{padding:8px 10px 9px;font-size:.72rem}
+  .nums{grid-template-columns:1fr}
+  .nums div{border-right:0}
+  .nums div:nth-last-child(2){border-bottom:1px solid var(--line)}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">Sindid Arafat<small>Product and Business Analyst</small></div>
+    <nav aria-label="Pages">
+      <a class="tab" href="#about" data-tab="about">About</a>
+      <a class="tab" href="#work" data-tab="work">Case work</a>
+      <a class="tab" href="#figma" data-tab="figma">Figma</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<div class="banner">
+  <h1 class="banner-title">Self Job Assessment Example for Syeda Nilima Dola Apu from Sindid Arafat</h1>
+  <p class="banner-sub">I'd like to work in this organization as it matches my interests and I'd like to be groomed for better outputs.</p>
+</div>
+
+<!-- PAGE 1 -->
+<section class="page" id="p-about" data-page="about">
+  <div class="hero">
+    <p class="eyebrow">Dhaka, Bangladesh · CSE graduate, BRAC University</p>
+    <h1>Sindid Arafat</h1>
+    <p class="lead">I turn <mark>user pain points into requirements</mark> that engineers can build and business teams can sign off. My background is AI/ML and full-stack development, and my day-to-day tools are PRDs, Figma wireframes, Jira and Google Workspace.</p>
+    <div class="row">
+      <a class="btn solid" href="#work">See my case work</a>
+      <a class="btn" href="#figma">See my Figma workflow</a>
+    </div>
+  </div>
+
+  <dl class="facts">
+    <div><dt>Degree</dt><dd>BSc CSE, CGPA 3.70 / 4.00</dd></div>
+    <div><dt>Recognition</dt><dd>Innovation Hub Winner, ICT Division (Jul 2025)</dd></div>
+    <div><dt>Honors</dt><dd>Dean's List and VC's List</dd></div>
+  </dl>
+
+  <div class="cols">
+    <div class="stack">
+      <div>
+        <h2 class="label">How I work as an analyst</h2>
+        <div class="item"><h3>Requirements and PRDs</h3><p>I gather requirements from users and stakeholders, then document them as PRDs and features the team can act on.</p></div>
+        <div class="item"><h3>Wireframes and UAT</h3><p>I wireframe flows in Figma and support user acceptance testing so non-technical teams can review what is being built.</p></div>
+        <div class="item"><h3>Between technical and non-technical teams</h3><p>I coordinate across both sides and support decisions with data and technical grounding.</p></div>
+      </div>
+
+      <div>
+        <h2 class="label">Experience</h2>
+        <div class="item">
+          <h3>Assistant Director, BRAC University Computer Club</h3>
+          <p class="meta">Feb 2022 – Dec 2025 · Dhaka</p>
+          <ul>
+            <li>Led creative direction for flagship events including IntraHacktive 1.0: posters, motion graphics and the promotional video.</li>
+            <li>Designed and ran graphic design and motion graphics workshops for club members.</li>
+          </ul>
+        </div>
+        <div class="item">
+          <h3>Content Head, One Academy</h3>
+          <p class="meta">Sep 2024 – Mar 2025</p>
+          <ul>
+            <li>Served as Strategy Officer and Content Planner, shaping the content direction of the organization.</li>
+            <li>Made marketing more effective through tactical planning.</li>
+          </ul>
+        </div>
+        <div class="item">
+          <h3>ICT Coordinator, Faridpur Debate Forum</h3>
+          <p class="meta">Mar 2021 – Apr 2024 · Faridpur</p>
+          <ul>
+            <li>Managed club communication and marketing through poster design.</li>
+            <li>Handled ICT workshops and online resources, and debated as an active member.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="label">Projects</h2>
+        <div class="item"><h3>SkillSwap</h3><p class="meta">MERN stack</p><p>An online platform where users swap skills, message and connect with each other.</p></div>
+        <div class="item"><h3>Electrician Finder</h3><p class="meta">PHP</p><p>A web application to find nearby electricians, modeled on ride-hailing and food-delivery platforms.</p></div>
+        <div class="item"><h3>Bank Loan Approval Prediction</h3><p class="meta">AI/ML</p><p>A model that predicts bank loan approval outcomes.</p></div>
+        <div class="item"><h3>Weather Predictor and Heart Disease Predictor</h3><p class="meta">AI/ML</p><p>Two models: one for weather prediction, one that predicts heart disease from patient symptoms.</p></div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <div>
+        <h2 class="label">Skills</h2>
+        <dl class="skills">
+          <div><dt>Languages</dt><dd>Python, C#, JavaScript, TypeScript, Java, C, C++, PHP, SQL</dd></div>
+          <div><dt>Web and backend</dt><dd>React, Node.js, Express, .NET Framework, REST APIs, MongoDB, MySQL, Tailwind CSS</dd></div>
+          <div><dt>AI / ML</dt><dd>NumPy, Pandas, Scikit-learn, Matplotlib, SciPy, PyTorch, TensorFlow, Seaborn</dd></div>
+          <div><dt>Tools</dt><dd>Git, Git LFS, Docker, Postman, GitHub Actions, Jira, Google Workspace</dd></div>
+          <div><dt>Design</dt><dd>Figma, Photoshop, Illustrator, After Effects, Premiere Pro</dd></div>
+        </dl>
+      </div>
+      <div>
+        <h2 class="label">Education</h2>
+        <div class="item"><h3>BRAC University</h3><p class="meta">Sep 2022 – Sep 2026</p><p>BSc in Computer Science and Engineering. CGPA 3.70 / 4.00.</p></div>
+        <div class="item"><h3>Govt. Rajendra College</h3><p class="meta">HSC Science, 2021</p><p>GPA 5.00 / 5.00.</p></div>
+        <div class="item"><h3>Faridpur Zilla School</h3><p class="meta">SSC Science, 2019</p><p>GPA 5.00 / 5.00.</p></div>
+      </div>
+      <div>
+        <h2 class="label">Awards</h2>
+        <div class="item"><h3>Innovation Hub Winner</h3><p class="meta">ICT Division, Government of Bangladesh · Jul 2025</p><p>Won the UIHP program powered by The World Bank, advancing from BRAC IC6 to the national round with a tech solution for Bangladesh's service market.</p></div>
+        <div class="item"><h3>Dean's List and VC's List</h3><p class="meta">BRAC University</p><p>Merit-based scholarship for 4 semesters.</p></div>
+        <div class="item"><h3>Bronze Award</h3><p class="meta">The Duke of Edinburgh's International Award · May 2024</p></div>
+        <div class="item"><h3>Official Volunteer</h3><p class="meta">BRAC University</p><p>Three years in various roles.</p></div>
+      </div>
+      <div>
+        <h2 class="label">Contact</h2>
+        <div class="contact">
+          <p><span id="mail">sindidarafat275@gmail.com</span><button class="copy" type="button" data-copy="mail">Copy</button></p>
+          <p><span id="tel">01735807816</span><button class="copy" type="button" data-copy="tel">Copy</button></p>
+          <p><a href="https://linkedin.com/in/sindid-arafat-1a593233b" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/sindidarafat" target="_blank" rel="noopener">GitHub</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page" id="p-work" data-page="work" hidden>
+  <p class="eyebrow">Work related to this role</p>
+  <h2 class="big">Case work: from diagnosis to a costed plan</h2>
+  <p class="intro">Both cases are from Bizception 2026, a marketing case competition run by the Dhaka University Career Club and presented by Bashundhara Exercise Book. I led team One-Zero with Istiak Shuvo. Each case follows the same method: find the root problem, split the customers, position the product, then put numbers and KPIs behind the plan.</p>
+
+  <article class="case">
+    <p class="eyebrow">Round 1 · Exercise book case</p>
+    <h2>Bashundhara Khata: Recognize the Original</h2>
+    <div class="case-grid">
+      <div>
+        <div class="blk"><h3>The problem</h3><p>Look-alike notebooks copy the red-white trade dress, and shopkeepers pass them off as genuine or swap in a generic khata for margin. Advertising lifts the category but not the brand, and a BDT 20 product from Babubazar threatens the BDT 50 line.</p></div>
+        <div class="blk"><h3>The insight</h3><p>Two buyers share one shelf. Guardians, parents of 5–10 year olds, buy on trust. Autonomous students aged 16–24 buy on price. The sale is decided in the three seconds a shopkeeper picks which khata to hand over, so the plan needs consumer pull and retailer push.</p></div>
+        <div class="blk"><h3>The plan: three pillars</h3>
+          <ul class="moves">
+            <li><b>Bijoy Card.</b> Retailer gamification. A unique QR on every case, a WhatsApp bot with no app download, bronze to platinum tiers, and a back-end rebate that matches Babubazar's trade margin without cutting shelf price.</li>
+            <li><b>Asol Cheno Seal.</b> Three ways to verify, even offline: scan a serialized QR, send a missed call or SMS, or feel a die-cut corner notch.</li>
+            <li><b>Segmented campaigns.</b> A trust story for guardians and a fair-price, identity story for students.</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h3>Numbers in the deck</h3>
+        <dl class="nums">
+          <div><dt>Budget</dt><dd>BDT 5.17 crore, 12 months</dd></div>
+          <div><dt>Retailers</dt><dd>50,000+ onboarded</dd></div>
+          <div><dt>Cost per retailer</dt><dd>about BDT 160</dd></div>
+          <div><dt>Reach</dt><dd>50 lakh+ parents, 20 lakh+ students</dd></div>
+        </dl>
+        <div class="viz">
+          <p class="viz-title">Where the BDT 5.17 crore goes (lakh)</p>
+          <ul class="bars">
+            <li><div class="top2"><span>Nirbhoye Lekho guardian campaign</span><span>120</span></div><div class="track"><div class="fill" style="--w:100%"></div></div></li>
+            <li><div class="top2"><span>Anti-counterfeit packaging</span><span>100</span></div><div class="track"><div class="fill" style="--w:83.3%"></div></div></li>
+            <li><div class="top2"><span>Retailer Bijoy Card program</span><span>80</span></div><div class="track"><div class="fill" style="--w:66.7%"></div></div></li>
+            <li><div class="top2"><span>Fair Price student campaign</span><span>65</span></div><div class="track"><div class="fill" style="--w:54.2%"></div></div></li>
+            <li><div class="top2"><span>Retail POS and display</span><span>50</span></div><div class="track"><div class="fill" style="--w:41.7%"></div></div></li>
+            <li><div class="top2"><span>Monitoring and contingency</span><span>47</span></div><div class="track"><div class="fill" style="--w:39.2%"></div></div></li>
+            <li><div class="top2"><span>Consumer loyalty stamp card</span><span>40</span></div><div class="track"><div class="fill" style="--w:33.3%"></div></div></li>
+            <li><div class="top2"><span>Verification microsite and SMS</span><span>15</span></div><div class="track"><div class="fill" style="--w:12.5%"></div></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="case">
+    <p class="eyebrow">Round 2 · Ice cream case</p>
+    <h2>Polar Ice Cream: Chill Together</h2>
+    <div class="case-grid">
+      <div>
+        <div class="blk"><h3>The problem</h3><p>Winter sales fall 65% while SMP, AMF and cocoa costs rise 22%. Load-shedding melts stock, retailers push whoever offers the better scheme, and Polar sits in the squeezed middle between Igloo above and low-margin challengers below.</p></div>
+        <div class="blk"><h3>The insight</h3><p>Bangladeshis don't stop loving dessert in winter. It is the most social season and ice cream is missing from its moments. Winter is won on occasion and premium, not on discounts.</p></div>
+        <div class="blk"><h3>The plan: five moves, one idea</h3>
+          <ul class="moves">
+            <li><b>Dessert for every season.</b> A Winter Heritage Line with Nolen Gur Crunch, Cinnamon Cha and Pitha Swirl, plus share packs and a Dessert Box.</li>
+            <li><b>Polar Safe Zones.</b> Phase-change material plates on 10,000 high-risk freezers, so stock survives outages. Retrofitting beats new freezers, which carry a 104% import duty.</li>
+            <li><b>Polar Partner Programme.</b> Gold and Platinum tiers scored on sales growth only and paid in free stock.</li>
+            <li><b>#ChillTogether creator engine.</b> 346 creators from national to district level.</li>
+            <li><b>Chill Together Adda.</b> A five-city Winter Dessert Festival, campus and wedding events, and a year-round media plan.</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h3>Numbers in the deck</h3>
+        <dl class="nums">
+          <div><dt>Target</dt><dd>+35% winter volume by Year 2, zero price cuts</dd></div>
+          <div><dt>Investment</dt><dd>৳39.1 Cr over 18 months, stage-gated</dd></div>
+          <div><dt>3-year ROI</dt><dd>52%, payback in Month 21</dd></div>
+          <div><dt>Partner programme</dt><dd>about ৳1.3 Cr a year vs ৳12.6 Cr for a flat +2% margin</dd></div>
+        </dl>
+        <div class="viz">
+          <p class="viz-title">Cumulative net, base case (৳ Cr)</p>
+          <svg viewBox="0 0 340 214" role="img" aria-label="Cumulative net of minus 12.6 crore in Year 1, 5.5 in Year 2 and 29.0 in Year 3">
+            <line x1="20" y1="120" x2="330" y2="120" style="stroke:var(--fg)" stroke-width="1.5"/>
+            <rect x="46" y="120" width="64" height="42" style="fill:var(--neg)"/>
+            <rect x="140" y="101.7" width="64" height="18.3" style="fill:var(--accent)"/>
+            <rect x="234" y="23.3" width="64" height="96.7" style="fill:var(--accent)"/>
+            <text x="78" y="180" text-anchor="middle" font-size="13" font-family="IBM Plex Mono, monospace" style="fill:var(--fg)">-12.6</text>
+            <text x="172" y="95" text-anchor="middle" font-size="13" font-family="IBM Plex Mono, monospace" style="fill:var(--fg)">5.5</text>
+            <text x="266" y="16" text-anchor="middle" font-size="13" font-family="IBM Plex Mono, monospace" style="fill:var(--fg)">29.0</text>
+            <text x="78" y="206" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, monospace" style="fill:var(--muted)">Year 1</text>
+            <text x="172" y="206" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, monospace" style="fill:var(--muted)">Year 2</text>
+            <text x="266" y="206" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, monospace" style="fill:var(--muted)">Year 3</text>
+          </svg>
+          <p class="cap">The deck also stress-tests the plan: a +15% winter lift returns 9% ROI with payback in Month 32, and a +50% lift returns 84% with payback in Month 16.</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <h2 class="label" style="margin-top:56px">What this shows for an analyst role</h2>
+  <div class="skillrows">
+    <div><h3>Problem framing</h3><p>Both decks open with a root-cause diagnosis that ties every proposed move back to a named problem.</p></div>
+    <div><h3>Customer segmentation</h3><p>Guardians and students in Round 1, weekend families, young pros, campus crews and B2B partners in Round 2, each with its own need and channel.</p></div>
+    <div><h3>Business case</h3><p>Costed budgets, an ROI and payback model, and sensitivity scenarios instead of a single optimistic number.</p></div>
+    <div><h3>KPIs and risk</h3><p>Measurable targets for every move, and a likelihood, impact, mitigation and Plan B table for each risk.</p></div>
+  </div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page" id="p-figma" data-page="figma" hidden>
+  <p class="eyebrow">Figma skills</p>
+  <h2 class="big">BRAC Kumon digital attendance workflow</h2>
+  <p class="intro">Figma is where I turn requirements into flows and screens that stakeholders can review before anything is built. This project maps a digital attendance workflow for BRAC Kumon.</p>
+
+  <div class="linkbox">
+    <div class="row">
+      <a class="btn solid" href="https://www.figma.com/design/Ap8PBngh3WJ04oItjtUVLr/BRAC-Kumon-Digital-Attendance---Sindid_Arafat?node-id=0-1&amp;t=2WwFubvLsAppHhP3-0" target="_blank" rel="noopener">Open the Figma file</a>
+    </div>
+    <p class="url"><span id="figurl">https://www.figma.com/design/Ap8PBngh3WJ04oItjtUVLr/BRAC-Kumon-Digital-Attendance---Sindid_Arafat?node-id=0-1&amp;t=2WwFubvLsAppHhP3-0</span> <button class="copy" type="button" data-copy="figurl">Copy link</button></p>
+  </div>
+
+  <h2 class="label" style="margin-top:48px">Workflow preview</h2>
+  <div class="flow">
+    <figure class="step" style="margin:0">
+      <div class="phone"><div class="bar"></div><h4>Sign in</h4><div class="field">Staff ID</div><div class="field">Password</div><div class="pbtn">Continue</div></div>
+      <figcaption><b>Step 1</b>Staff signs in</figcaption>
+    </figure>
+    <figure class="step" style="margin:0">
+      <div class="phone"><div class="bar"></div><h4>Today's classes</h4><div class="cls on"><span>Class A</span><span>4:00 pm</span></div><div class="cls"><span>Class B</span><span>5:00 pm</span></div><div class="cls"><span>Class C</span><span>6:00 pm</span></div></div>
+      <figcaption><b>Step 2</b>Picks the class</figcaption>
+    </figure>
+    <figure class="step" style="margin:0">
+      <div class="phone"><div class="bar"></div><h4>Class A</h4>
+        <div class="stu"><span>Student 1</span><span class="tog"><i class="p">P</i><i>A</i></span></div>
+        <div class="stu"><span>Student 2</span><span class="tog"><i class="p">P</i><i>A</i></span></div>
+        <div class="stu"><span>Student 3</span><span class="tog"><i>P</i><i class="a">A</i></span></div>
+        <div class="stu"><span>Student 4</span><span class="tog"><i class="p">P</i><i>A</i></span></div>
+        <div class="pbtn">Submit</div></div>
+      <figcaption><b>Step 3</b>Marks attendance</figcaption>
+    </figure>
+    <figure class="step" style="margin:0">
+      <div class="phone"><div class="bar"></div><div class="done"><div class="tick">&#10003;</div><h4>Attendance saved</h4><span>3 present · 1 absent</span></div></div>
+      <figcaption><b>Step 4</b>Confirms the record</figcaption>
+    </figure>
+  </div>
+  <p class="cap" style="margin-top:16px;max-width:70ch">These four frames are a stand-in drawn for this page, with sample names and counts. The real screens, flows and annotations are in the Figma file above.</p>
+
+  <h2 class="label" style="margin-top:56px">Where Figma fits in my work</h2>
+  <div class="skillrows">
+    <div><h3>Wireframes for PRDs</h3><p>Each requirement gets a low-fidelity screen, so the PRD and the design say the same thing.</p></div>
+    <div><h3>User flows</h3><p>I map the steps a person takes, which exposes missing states and edge cases before development starts.</p></div>
+    <div><h3>Review and UAT</h3><p>Non-technical stakeholders and testers can click through the design and give feedback in one place.</p></div>
+    <div><h3>Wider design toolkit</h3><p>Photoshop, Illustrator, After Effects and Premiere Pro, used for event posters, motion graphics and promo videos at the BRAC University Computer Club.</p></div>
+  </div>
+</section>
+
+<footer>
+  <span>Sindid Arafat · Dhaka, Bangladesh</span>
+  <span>sindidarafat275@gmail.com · 01735807816</span>
+</footer>
+</main>
+
+<script>
+(function(){
+  var pages=['about','work','figma'];
+  function show(){
+    var h=(location.hash||'').replace('#','');
+    if(pages.indexOf(h)<0)h='about';
+    pages.forEach(function(p){
+      var s=document.getElementById('p-'+p);
+      if(s)s.hidden=(p!==h);
+    });
+    var tabs=document.querySelectorAll('.tab');
+    for(var i=0;i<tabs.length;i++){
+      if(tabs[i].getAttribute('data-tab')===h)tabs[i].setAttribute('aria-current','page');
+      else tabs[i].removeAttribute('aria-current');
+    }
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',show);
+  show();
+
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('[data-copy]');
+    if(!b)return;
+    var el=document.getElementById(b.getAttribute('data-copy'));
+    if(!el)return;
+    var txt=el.textContent.trim();
+    var old=b.textContent;
+    function ok(){b.textContent='Copied';setTimeout(function(){b.textContent=old;},1600);}
+    function fallback(){
+      try{
+        var r=document.createRange();r.selectNodeContents(el);
+        var s=window.getSelection();s.removeAllRanges();s.addRange(r);
+        b.textContent='Selected';setTimeout(function(){b.textContent=old;},1600);
+      }catch(err){}
+    }
+    try{
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(ok,fallback);
+      }else fallback();
+    }catch(err){fallback();}
+  });
+})();
+</script>
+</body>
+</html>
